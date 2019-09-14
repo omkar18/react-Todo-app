@@ -1,0 +1,68 @@
+import React, { Component } from 'react';
+
+class Form extends Component {
+    constructor(props) {
+        super(props);
+
+        this.initialState = {
+            name: '',
+            job: ''
+        };
+
+        this.state = this.initialState;
+    }
+
+    handleChange = event => {
+        const { name, value } = event.target;
+
+        this.setState({
+            [name]: value
+        });
+        console.log("name is" + event.target.value)
+    }
+
+    onFormSubmit = (event) => {
+        event.preventDefault();
+
+        this.props.handleSubmit(this.state);
+        this.setState(this.initialState);
+        console.log("initial state is ", this.state)
+    }
+
+
+
+    render() {
+        const { name, job } = this.state;
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={this.handleChange} />
+                    <label>Job</label>
+                    <input
+                        type="text"
+                        name="job"
+                        value={job}
+                        onChange={this.handleChange} />
+                    <button type="submit">
+                        Submit
+                </button>
+                </form>
+
+                <div>
+                    <updateUI />
+                </div>
+
+            </div>
+
+        );
+    }
+}
+
+
+
+export default Form;
